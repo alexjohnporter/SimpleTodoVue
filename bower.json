@@ -1,0 +1,23 @@
+{
+  "name": "SimpleTodoVue",
+  "description": "Simple Todo",
+  "main": "index.js",
+  "authors": [
+    "Alex Porter"
+  ],
+  "license": "BSD-2-Clause",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "bootstrap-sass-official#~3.3.5",
+    "font-awesome": "~4.4.0"
+  }
+}
