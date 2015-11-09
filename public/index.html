@@ -42,6 +42,7 @@
             <h3>{{ todo.todoName }}</h3>
 
             <div class="body">{{todo.todoDescription}}</div>
+            <button class="btn btn-danger" v-on:click="deleteTodo(todo)">Delete</button>
         </article>
     </div>
 

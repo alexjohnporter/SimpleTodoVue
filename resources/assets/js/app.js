@@ -7,6 +7,13 @@ new Vue({
 
     data: {
         todos: [],
+
+        todo: {
+            todoIdentifier: '',
+            todoName: '',
+            todoDescription: ''
+        },
+
         newTodo: {
             todoName: '',
             todoDescription: ''
@@ -19,11 +26,18 @@ new Vue({
             for(var key in this.newTodo) {
                 if(! this.newTodo[key]) return true;
             }
+        },
+
+        noTodos: function() {
+            if(this.todos.length == 0){
+              //do stuff here
+            }
         }
     },
 
     ready: function () {
-        this.getTodos()
+        this.getTodos(),
+        this.noTodos()
     },
     
     methods: {
@@ -49,6 +63,15 @@ new Vue({
                         'todoName' : "",
                         'todoDescription' : ""
                     };
+                });
+        },
+
+        deleteTodo: function(todo)
+        {
+            this.$http.delete(
+                'http://localhost:10000/delete/'+todo.todoIdentifier,
+                function(data, status){
+                    this.getTodos();
                 });
         }
     }
