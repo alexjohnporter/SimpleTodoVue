@@ -1,13 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="css/vendor.css" />
+    <title>SimpleTodo</title>
+    <link rel="stylesheet" href="css/vendor.css"/>
+
 </head>
 <body id="application">
-<h1>{{ message }}</h1>
+<div class="container text-center">
 
+    <h1 class="">SimpleTodo</h1>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <form method="POST" v-on:submit.prevent="onFormSubmit" id="todoForm">
+
+                <div class="form-group">
+                    <label for="todoName">Todo Name:</label>
+                    <input type="text" name="todoName" id="todoName" class="form-control" v-model="newTodo.todoName"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="todoDescription">Todo Description:</label>
+                    <textarea type="text" name="todoDescription" id="todoDescription" class="form-control"
+                              v-model="newTodo.todoDescription"></textarea>
+                </div>
+
+                <input type="submit" class="btn btn-lg btn-block" v-show="newTodo.todoName && newTodo.todoDescription"/>
+            </form>
+
+            <div class="alert alert-success" v-if="submitted">
+                <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success!</strong> Todo created!
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <article class="todo" v-for="todo in todos.data">
+            <h3>{{ todo.todoName }}</h3>
+
+            <div class="body">{{todo.todoDescription}}</div>
+        </article>
+    </div>
+
+</div>
 <script type="text/javascript" src="js/vendor.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
 </body>
