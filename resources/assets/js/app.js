@@ -1,11 +1,12 @@
 var Vue = require('vue');
 Vue.use(require('vue-resource'));
+Vue.http.options.emulateJSON = true;
 
 new Vue({
     el: "#application",
 
     data: {
-        todos: {},
+        todos: [],
         newTodo: {
             todoName: '',
             todoDescription: ''
@@ -26,25 +27,29 @@ new Vue({
     },
     
     methods: {
+
         getTodos: function () {
             this.$http.get('http://localhost:10000/', function (todos) {
                 this.todos = todos;
             });
         },
 
-        onFormSubmit: function(e){
-            e.preventDefault();
+        onFormSubmit: function(){
             var todo = this.newTodo;
 
-            this.$http.post('http://localhost:10000/add', todo);
+            this.$http.post(
+                'http://localhost:10000/add',
+                {'todoName': todo.todoName, 'todoDescription': todo.todoDescription},
+                function(data, status){
+                    this.getTodos();
 
-            this.submitted = true;
+                    this.submitted = true;
 
-            this.newTodo = {
-                'todoName' : "",
-                'todoDescription' : ""
-            };
-
+                    this.newTodo = {
+                        'todoName' : "",
+                        'todoDescription' : ""
+                    };
+                });
         }
     }
 
